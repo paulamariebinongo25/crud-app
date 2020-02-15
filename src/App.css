@@ -8,7 +8,6 @@
 
 .table-row-hover:hover {
   background-color: #333;
-  color: red;
 }
 .table-cell-hover {
   color: #fff;
@@ -24,4 +23,42 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.nav-header-title {
+  margin-left: 10px;
+}
+
+.navbar-start {
+  margin-left: 30px;
+}
+
+/* .nav-list {
+  background-color: #363636;
+}
+
+.nav-list:hover {
+  background-color: #000;
+} */
+
+.btn-color {
+  background-color: #d35400;
+  padding: 9px 22px;
+  margin: 0 8px 8px 0;
+  border: 1px solid #d35400;
+  color: #000;
+  border-radius: 20px;
+  font-size: 15px;
+}
+
+.search-bar {
+  margin-top: 13px;
+}
+
+.first-column {
+  padding-top: 30px;
+}
+
+.second-column {
+  padding-top: 30px;
 }

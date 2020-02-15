@@ -1,165 +1,250 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchUsers } from "../../redux/user/userActions";
+// import PropTypes from "prop-types";
 
 import ListOfUsersFollowedTable from "./ListOfUsersFollowedTable";
-
-const ListOfUsersTobeFollowedTable = () => {
-  // const initialAddState = { id: null, username: "" };
-  // const [user, setUser] = useState(initialAddState);
-  const [listUsers, setListUsers] = useState([]);
-
-  useEffect(async () => {
-    const response = await fetch(
-      "https://api.soundcloud.com/users/3207/followings?client_id=f0sxU3Az3dcl0lS1M9wFJ00SqawVL72n"
-    );
-    const listUsers = await response.json();
-    setListUsers(listUsers.collection);
-    // console.log(listUsers.collection);
+import UserProfile from "../forms/UserProfile";
+const ListOfUsersTobeFollowedTable = ({ usersData, fetchUsers }) => {
+  useEffect(() => {
+    fetchUsers();
   }, []);
 
-  const addUser = (id, collection) => {
-    // collection.id = listUsers.length + 1;
-    // collection.id = [listUsers];
-
-    setListUsers(listUsers.filter(collection => collection.id === id));
+  console.log(usersData);
+  const handleClickDelete = id => {
+    fetch("http://localhost:3000/users/" + id, { method: "DELETE" })
+      .then(response => {
+        response.json();
+        // .then(response => {
+        //   console.log(response);
+        // });
+        fetchUsers();
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
-  // const handleSubmitAdd = e => {
-  //   e.preventDefault();
-  //   addUser(user);
-  //   setUser(initialAddState);
+  // const handleClickEdit = id => {
+  //   fetch("http://localhost:3000/users/" + id, {
+  //     headers: {
+  //       "Content-Type": "application/json;charset-utf-8"
+  //     },
+  //     method: "PUT",
+  //     body: JSON.stringify({
+  //       id: "",
+  //       username: "",
+  //       first_name: "",
+  //       last_name: ""
+  //     })
+  //   })
+  //     .then(response => {
+  //       response.json();
+  //       // .then(response => {
+  //       //   console.log(response);
+  //       // });
+  //       fetchUsers();
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
   // };
-  const deleteUser = id => {
-    setListUsers(listUsers.map(collection => collection.id !== id));
-  };
+  // console.log(handleClickEdit());
+
+  // // useEffect(async () => {
+  // //   const response = await fetch(
+  // //     "https://api.soundcloud.com/users/3207/followings?client_id=f0sxU3Az3dcl0lS1M9wFJ00SqawVL72n"
+  // //   );
+  // //   const listUsers = await response.json();
+  // //   setListUsers(listUsers.data);
+  // //   // console.log(listUsers.data);
+  // // }, []);
+
+  // ListOfUsersTobeFollowedTable.prototype = {
+  //   fetchUsers: PropTypes.func.isRequired,
+  //   users: PropTypes.object.isRequired
+  // };
 
   return (
     <div>
-      <div class="columns is-mobile is-centered">
-        <div class="box">
-          <div class="table-container">
-            <table class="table is-bordered is-fullwidth">
+      <div className="columns is-mobile is-centered">
+        <div className="box">
+          <div className="table-container">
+            <table className="table is-bordered is-fullwidth">
               <thead>
-                <tr class="table-row">
-                  <th class="title is-6 has-text-centered">
-                    <div class="table-cell container">Avatar</div>
+                <tr className="table-row">
+                  {/* <th className="title is-6 has-text-centered">
+                    <div className="table-cell container">User ID</div>
+                  </th> */}
+                  <th className="title is-6 has-text-centered">
+                    <div className="table-cell container">Avatar</div>
                   </th>
-                  <th class="title is-6 has-text-centered">
-                    <div class="table-cell container">Username</div>
+                  <th className="title is-6 has-text-centered">
+                    <div className="table-cell container">Username</div>
                   </th>
-                  <th class="title is-6 has-text-centered">
-                    <div class="table-cell container">First Name</div>
+                  <th className="title is-6 has-text-centered">
+                    <div className="table-cell container">First Name</div>
                   </th>
-                  <th class="title is-6 has-text-centered">
-                    <div class="table-cell container">Last Name</div>
+                  <th className="title is-6 has-text-centered">
+                    <div className="table-cell container">Last Name</div>
                   </th>
-                  <th class="title is-6 has-text-centered">
-                    <div class="table-cell container">Full Name</div>
+                  {/* <th className="title is-6 has-text-centered">
+                    <div className="table-cell container">Full Name</div>
                   </th>
-                  <th class="title is-6 has-text-centered">
-                    <div class="table-cell container">City</div>
+                  <th className="title is-6 has-text-centered">
+                    <div className="table-cell container">City</div>
                   </th>
-                  <th class="title is-6 has-text-centered">
-                    <div class="level">
-                      <div class="level-item">
-                        <div class="table-cell container">Followers</div>
+                  <th className="title is-6 has-text-centered">
+                    <div className="level">
+                      <div className="level-item">
+                        <div className="table-cell container">Followers</div>
                       </div>
                     </div>
                   </th>
-                  <th class="title is-6 has-text-centered">
-                    <div class="level">
-                      <div class="level-item">
-                        <div class="table-cell container">Followings</div>
+                  <th className="title is-6 has-text-centered">
+                    <div className="level">
+                      <div className="level-item">
+                        <div className="table-cell container">Followings</div>
                       </div>
                     </div>
-                  </th>
-                  <th class="title is-6 has-text-centered">
-                    <div class="table-cell container">Actions</div>
+                  </th> */}
+                  <th className="title is-6 has-text-centered">
+                    <div className="table-cell container">Actions</div>
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {listUsers.map(collection => (
-                  <tr class="table-row-hover" key={collection.id}>
-                    <td class="subtitle is-6 has-text-centered">
-                      <div class="table-cell-hover container">
-                        <img src={collection.avatar_url} />
+                {usersData.map(user => (
+                  <tr className="table-row-hover" key={user.id}>
+                    {/* <td className="subtitle is-6 has-text-centered">
+                      <div className="table-cell-hover container">
+                        {user.id}
+                      </div>
+                    </td> */}
+                    <td className="subtitle is-6 has-text-centered">
+                      <div className="table-cell-hover container">
+                        <img src={user.avatar_url} />
                       </div>
                     </td>
-                    <td class="subtitle is-6 has-text-centered">
-                      <div class="table-cell-hover container">
-                        {collection.username}
+                    <td className="subtitle is-6 has-text-centered">
+                      <div className="table-cell-hover container">
+                        {user.username}
                       </div>
                     </td>
-                    <td class="subtitle is-6 has-text-centered">
-                      <div class="table-cell-hover container">
-                        {collection.first_name}
+                    <td className="subtitle is-6 has-text-centered">
+                      <div className="table-cell-hover container">
+                        {user.first_name}
                       </div>
                     </td>
-                    <td class="subtitle is-6 has-text-centered">
-                      <div class="table-cell-hover container">
-                        {collection.last_name}
+                    <td className="subtitle is-6 has-text-centered">
+                      <div className="table-cell-hover container">
+                        {user.last_name}
                       </div>
                     </td>
-                    <td class="subtitle is-6 has-text-centered">
-                      <div class="table-cell-hover container">
-                        {collection.full_name}
+                    {/* <td className="subtitle is-6 has-text-centered">
+                      <div className="table-cell-hover container">
+                        {data.full_name}
                       </div>
                     </td>
-                    <td class="subtitle is-6 has-text-centered">
-                      <div class="table-cell-hover container">
-                        {collection.city}
+                    <td className="subtitle is-6 has-text-centered">
+                      <div className="table-cell-hover container">
+                        {data.city}
                       </div>
                     </td>
-                    <td class="subtitle is-6 has-text-centered">
-                      <div class="table-cell-hover container">
-                        {collection.followers_count}
+                    <td className="subtitle is-6 has-text-centered">
+                      <div className="table-cell-hover container">
+                        {data.followers_count}
                       </div>
                     </td>
-                    <td class="subtitle is-6 has-text-centered">
-                      <div class="table-cell-hover container">
-                        {collection.followings_count}
+                    <td className="subtitle is-6 has-text-centered">
+                      <div className="table-cell-hover container">
+                        {data.followings_count}
                       </div>
-                    </td>
-                    <td class="subtitle is-6 has-text-centered">
-                      <div class="container">
-                        <div class="level">
-                          <div class="level-item">
-                            {/* <div class="buttons"> */}
-
-                            <button
-                              // onClick={() => addUser(collection.id)}
-                              class="button is-link is-hoverable"
-                            >
-                              <span class="icon is-medium is-left">
-                                <i class="fas fa-user-plus"></i>
-                              </span>
-                              <span>Follow</span>
-                            </button>
-                            {/* <button
-                                class="second-btn button is-danger"
-                                onClick={() => deleteUser(collection.id)}
+                    </td> */}
+                    <td className="subtitle is-6 has-text-centered">
+                      <div className="container">
+                        <div className="level">
+                          <div className="level-item">
+                            <div className="buttons">
+                              <button
+                                // onClick={() =>
+                                //   handleClickEdit(
+                                //     user.id,
+                                //     user.username,
+                                //     user.first_name,
+                                //     user.last_name
+                                //   )
+                                // }
+                                className="button is-link is-hoverable"
                               >
-                                <span class="icon is-medium is-left">
-                                  <i class="fas fa-trash"></i>
+                                <span className="icon is-medium is-left">
+                                  <i className="fas fa-pen"></i>
+                                </span>
+                                <span>Edit</span>
+                              </button>
+                              <button
+                                className="second-btn button is-danger"
+                                onClick={() => handleClickDelete(user.id)}
+                              >
+                                <span className="icon is-medium is-left">
+                                  <i className="fas fa-trash"></i>
                                 </span>
                                 <span>Delete</span>
-                              </button> */}
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      {/* </div> */}
                     </td>
                   </tr>
                 ))}
+                {/* // ) : (
+                //   <tr>
+                //     <td colSpan={4}>
+                //       <div classNameName="container">
+                //         <div className="subtitle is-6 has-text-centered">
+                //           No Lists of Following
+                //         </div>
+                //       </div>
+                //     </td>
+                //     <td className="subtitle is-6 has-text-centered">
+                //       <div className="level">
+                //         <div className="level-item">
+                //           <button className="second-btn button is-danger" disabled>
+                //             <span className="icon is-medium is-left">
+                //               <i className="fas fa-trash"></i>
+                //             </span>
+                //             <span>Delete</span>
+                //           </button>
+                //         </div>
+                //       </div>
+                //     </td>
+                //   </tr>
+                // )} */}
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <ListOfUsersFollowedTable deleteUser={deleteUser} />
-      {/* <UserProfile addUsers={addUsers} /> */}
+      {/* <ListOfUsersFollowedTable />
+      <UserProfile /> */}
     </div>
   );
 };
 
-export default ListOfUsersTobeFollowedTable;
+const mapStateToProps = state => {
+  return {
+    usersData: state.users
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchUsers: () => dispatch(fetchUsers())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListOfUsersTobeFollowedTable);

@@ -1,27 +1,56 @@
 import React, { useState, useEffect } from "react";
 
-const ListOfUsersFollowedTable = props => {
-  const [listUsers, setListUsers] = useState([]);
-  // const initialAddState = {
-  //   id: null,
-  //   username: "",
-  //   first_name: "",
-  //   last_name: "",
-  //   full_name: "",
-  //   city: "",
-  //   followers_count: "",
-  //   followings_count: ""
-  // };
-  // const [addUsers, setAddUsers] = useState(initialAddState);
+// {
+//   {
+//     "id": "1",
+//     "avatar_url": "https://i1.sndcdn.com/avatars-000602838126-ptk177-large.jpg",
+//     "username": "xmen_Boy",
+//     "first_name": "X",
+//     "last_name": "Man"
+//   }
+//   "id": "2",
+//   "avatar_url": "https://i1.sndcdn.com/avatars-000009799632-tqwjcs-large.jpg",
+//   "username": "cleffy",
+//   "first_name": "Cle",
+//   "last_name": "Ford"
+// },
+// {
+//   "id":  "3",
+//   "avatar_url": "https://i1.sndcdn.com/avatars-000666018230-yggt3o-large.jpg",
+//   "username": "intsik",
+//   "first_name": "Paulo",
+//   "last_name": "Unggoybels"
+// },
+// {
+//   "id":  "4",
+//   "avatar_url": "https://i1.sndcdn.com/avatars-000191314759-hp74mu-large.jpg",
+//   "username": "pulangcrackers",
+//   "first_name": "Paula",
+//   "last_name": "Maria"
+// }
 
-  useEffect(async () => {
-    const response = await fetch(
-      "https://api.soundcloud.com/users/3207/followings?client_id=f0sxU3Az3dcl0lS1M9wFJ00SqawVL72n"
-    );
-    const listUsers = await response.json();
-    setListUsers(listUsers.collection);
-    // console.log(listUsers.collection);
-  }, []);
+const ListOfUsersFollowedTable = props => {
+  // const [usersData, setusersData] = useState([]);
+  // // const initialAddState = {
+  // //   id: null,
+  // //   username: "",
+  // //   first_name: "",
+  // //   last_name: "",
+  // //   full_name: "",
+  // //   city: "",
+  // //   followers_count: "",
+  // //   followings_count: ""
+  // // };
+  // // const [addUsers, setAddUsers] = useState(initialAddState);
+
+  // useEffect(async () => {
+  //   const response = await fetch(
+  //     "https://api.soundcloud.com/users/3207/followings?client_id=f0sxU3Az3dcl0lS1M9wFJ00SqawVL72n"
+  //   );
+  //   const usersData = await response.json();
+  //   setusersData(usersData.collection);
+  //   // console.log(usersData.collection);
+  // }, []);
   return (
     <div class="columns is-mobile is-centered">
       <div class="box">
@@ -67,8 +96,8 @@ const ListOfUsersFollowedTable = props => {
               </tr>
             </thead>
             <tbody>
-              {listUsers < 0 ? (
-                listUsers.map(collection => (
+              {props.usersData < 0 ? (
+                props.usersData.map(collection => (
                   <tr class="table-row-hover" key={collection.id}>
                     <td class="subtitle is-6 has-text-centered">
                       <div class="table-cell-hover container">
