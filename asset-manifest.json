@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/crud-app/static/css/main.81b24cb8.chunk.css",
+    "main.js": "/crud-app/static/js/main.2ece2b2f.chunk.js",
+    "main.js.map": "/crud-app/static/js/main.2ece2b2f.chunk.js.map",
+    "runtime-main.js": "/crud-app/static/js/runtime-main.bba1dde0.js",
+    "runtime-main.js.map": "/crud-app/static/js/runtime-main.bba1dde0.js.map",
+    "static/css/2.c4418c31.chunk.css": "/crud-app/static/css/2.c4418c31.chunk.css",
+    "static/js/2.1ea5eeaa.chunk.js": "/crud-app/static/js/2.1ea5eeaa.chunk.js",
+    "static/js/2.1ea5eeaa.chunk.js.map": "/crud-app/static/js/2.1ea5eeaa.chunk.js.map",
+    "index.html": "/crud-app/index.html",
+    "precache-manifest.9c8d36b20ab7c3878b96ba7c33ee1e85.js": "/crud-app/precache-manifest.9c8d36b20ab7c3878b96ba7c33ee1e85.js",
+    "service-worker.js": "/crud-app/service-worker.js",
+    "static/css/2.c4418c31.chunk.css.map": "/crud-app/static/css/2.c4418c31.chunk.css.map",
+    "static/css/main.81b24cb8.chunk.css.map": "/crud-app/static/css/main.81b24cb8.chunk.css.map",
+    "static/js/2.1ea5eeaa.chunk.js.LICENSE.txt": "/crud-app/static/js/2.1ea5eeaa.chunk.js.LICENSE.txt",
+    "static/media/itunes.png": "/crud-app/static/media/itunes.2f3b4dc3.png",
+    "static/media/myspace.png": "/crud-app/static/media/myspace.c87b8039.png",
+    "static/media/worldMap.png": "/crud-app/static/media/worldMap.d0991412.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bba1dde0.js",
+    "static/css/2.c4418c31.chunk.css",
+    "static/js/2.1ea5eeaa.chunk.js",
+    "static/css/main.81b24cb8.chunk.css",
+    "static/js/main.2ece2b2f.chunk.js"
+  ]
+}
