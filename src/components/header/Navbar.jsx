@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import Banner from "../../components/assets/images/soundcloud.png";
 
+import Searchbar from "../search/Searchbar";
+
 const Navbar = () => {
   const [isBurgerActive, setIsBurgerActive] = useState(false);
 
@@ -59,16 +61,7 @@ const Navbar = () => {
           </div>
 
           <div className="navbar-end">
-            <div className="field has-addons">
-              <div className="search-bar nav-field-control control">
-                <input className="input" type="text" placeholder="Search" />
-              </div>
-              <div className="search-bar nav-field-control control">
-                <a className="button is-dark has-text-white is-rounded">
-                  Search
-                </a>
-              </div>
-            </div>
+            <Searchbar />
             <div className="navbar-item">
               <div className="buttons">
                 <a className="button is-white is-rounded has-text-black">

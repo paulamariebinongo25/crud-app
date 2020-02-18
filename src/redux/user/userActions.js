@@ -24,13 +24,17 @@ export const fetchUsersFailure = error => ({
 //   payload: json
 // });
 
-export const fetchUsers = () => {
+export const fetchUsers = keyword => {
   //   const isLoading = true;
 
   return async dispatch => {
     dispatch(fetchUsersRequest());
     try {
-      const response = await fetch("http://localhost:3000/users");
+      let apiUrl = "http://localhost:3000/users";
+      if (keyword) {
+        apiUrl += `?q=${keyword}`;
+      }
+      const response = await fetch(apiUrl);
 
       const users = await response.json();
       dispatch(fetchUsersSuccess(users));

@@ -25,7 +25,7 @@ const AddUserForm = () => {
     setAddNewUser({ ...addNewUser, last_name: e.target.value });
   };
 
-  const handleAddUser = async () => {
+  const handleClickAddUser = async () => {
     try {
       const response = await fetch("http://localhost:3000/users/", {
         headers: {
@@ -44,7 +44,7 @@ const AddUserForm = () => {
     e.preventDefault();
     // if (!user.username) return;
 
-    handleAddUser(addNewUser);
+    handleClickAddUser(addNewUser);
   };
 
   return (
@@ -110,7 +110,7 @@ const AddUserForm = () => {
               <div className="control">
                 <button
                   className="button is-rounded is-black is-fullwidth"
-                  onClick={() => handleAddUser()}
+                  onClick={() => handleClickAddUser()}
                 >
                   Add New User
                 </button>

@@ -1,30 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchUsers } from "../../redux/user/userActions";
-// import PropTypes from "prop-types";
 
-import ListOfUsersFollowedTable from "./ListOfUsersFollowedTable";
-import UserProfile from "../forms/UserProfile";
+import EditUserForm from "../forms/EditUserForm";
+
 const ListOfUsersTobeFollowedTable = ({ usersData, fetchUsers }) => {
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const [isModalActive, setIsModalActive] = useState(false);
 
-  console.log(usersData);
-  const handleClickDelete = id => {
+  const [editUser, setEditUser] = useState({
+    id: "",
+    username: "",
+    first_name: "",
+    last_name: ""
+  });
+
+  const handleClickEditUser = (id, username, first_name, last_name) => {
+    console.log(editUser);
+    setEditUser({ id, username, first_name, last_name });
+    setIsModalActive(true);
+  };
+
+  const handleClickDeleteUser = id => {
     fetch("http://localhost:3000/users/" + id, { method: "DELETE" })
       .then(response => {
         response.json();
-        // .then(response => {
-        //   console.log(response);
-        // });
+        console.log(response);
         fetchUsers();
       })
       .catch(error => {
         console.log(error);
       });
   };
-
   // const handleClickEdit = id => {
   //   fetch("http://localhost:3000/users/" + id, {
   //     headers: {
@@ -60,10 +66,11 @@ const ListOfUsersTobeFollowedTable = ({ usersData, fetchUsers }) => {
   // //   // console.log(listUsers.data);
   // // }, []);
 
-  // ListOfUsersTobeFollowedTable.prototype = {
-  //   fetchUsers: PropTypes.func.isRequired,
-  //   users: PropTypes.object.isRequired
-  // };
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  console.log(usersData);
 
   return (
     <div>
@@ -73,9 +80,6 @@ const ListOfUsersTobeFollowedTable = ({ usersData, fetchUsers }) => {
             <table className="table is-bordered is-fullwidth">
               <thead>
                 <tr className="table-row">
-                  {/* <th className="title is-6 has-text-centered">
-                    <div className="table-cell container">User ID</div>
-                  </th> */}
                   <th className="title is-6 has-text-centered">
                     <div className="table-cell container">Avatar</div>
                   </th>
@@ -88,26 +92,6 @@ const ListOfUsersTobeFollowedTable = ({ usersData, fetchUsers }) => {
                   <th className="title is-6 has-text-centered">
                     <div className="table-cell container">Last Name</div>
                   </th>
-                  {/* <th className="title is-6 has-text-centered">
-                    <div className="table-cell container">Full Name</div>
-                  </th>
-                  <th className="title is-6 has-text-centered">
-                    <div className="table-cell container">City</div>
-                  </th>
-                  <th className="title is-6 has-text-centered">
-                    <div className="level">
-                      <div className="level-item">
-                        <div className="table-cell container">Followers</div>
-                      </div>
-                    </div>
-                  </th>
-                  <th className="title is-6 has-text-centered">
-                    <div className="level">
-                      <div className="level-item">
-                        <div className="table-cell container">Followings</div>
-                      </div>
-                    </div>
-                  </th> */}
                   <th className="title is-6 has-text-centered">
                     <div className="table-cell container">Actions</div>
                   </th>
@@ -116,14 +100,9 @@ const ListOfUsersTobeFollowedTable = ({ usersData, fetchUsers }) => {
               <tbody>
                 {usersData.map(user => (
                   <tr className="table-row-hover" key={user.id}>
-                    {/* <td className="subtitle is-6 has-text-centered">
-                      <div className="table-cell-hover container">
-                        {user.id}
-                      </div>
-                    </td> */}
                     <td className="subtitle is-6 has-text-centered">
                       <div className="table-cell-hover container">
-                        <img src={user.avatar_url} />
+                        <img src={user.avatar_url} alt="" />
                       </div>
                     </td>
                     <td className="subtitle is-6 has-text-centered">
@@ -141,50 +120,36 @@ const ListOfUsersTobeFollowedTable = ({ usersData, fetchUsers }) => {
                         {user.last_name}
                       </div>
                     </td>
-                    {/* <td className="subtitle is-6 has-text-centered">
-                      <div className="table-cell-hover container">
-                        {data.full_name}
-                      </div>
-                    </td>
-                    <td className="subtitle is-6 has-text-centered">
-                      <div className="table-cell-hover container">
-                        {data.city}
-                      </div>
-                    </td>
-                    <td className="subtitle is-6 has-text-centered">
-                      <div className="table-cell-hover container">
-                        {data.followers_count}
-                      </div>
-                    </td>
-                    <td className="subtitle is-6 has-text-centered">
-                      <div className="table-cell-hover container">
-                        {data.followings_count}
-                      </div>
-                    </td> */}
                     <td className="subtitle is-6 has-text-centered">
                       <div className="container">
                         <div className="level">
                           <div className="level-item">
                             <div className="buttons">
                               <button
-                                // onClick={() =>
-                                //   handleClickEdit(
-                                //     user.id,
-                                //     user.username,
-                                //     user.first_name,
-                                //     user.last_name
-                                //   )
-                                // }
                                 className="button is-link is-hoverable"
+                                onClick={() =>
+                                  handleClickEditUser(
+                                    user.id,
+                                    user.username,
+                                    user.first_name,
+                                    user.last_name
+                                  )
+                                }
                               >
                                 <span className="icon is-medium is-left">
                                   <i className="fas fa-pen"></i>
                                 </span>
                                 <span>Edit</span>
                               </button>
+                              <EditUserForm
+                                editUser={editUser}
+                                setEditUser={setEditUser}
+                                isModalActive={isModalActive}
+                                setIsModalActive={setIsModalActive}
+                              />
                               <button
                                 className="second-btn button is-danger"
-                                onClick={() => handleClickDelete(user.id)}
+                                onClick={() => handleClickDeleteUser(user.id)}
                               >
                                 <span className="icon is-medium is-left">
                                   <i className="fas fa-trash"></i>
@@ -198,36 +163,11 @@ const ListOfUsersTobeFollowedTable = ({ usersData, fetchUsers }) => {
                     </td>
                   </tr>
                 ))}
-                {/* // ) : (
-                //   <tr>
-                //     <td colSpan={4}>
-                //       <div classNameName="container">
-                //         <div className="subtitle is-6 has-text-centered">
-                //           No Lists of Following
-                //         </div>
-                //       </div>
-                //     </td>
-                //     <td className="subtitle is-6 has-text-centered">
-                //       <div className="level">
-                //         <div className="level-item">
-                //           <button className="second-btn button is-danger" disabled>
-                //             <span className="icon is-medium is-left">
-                //               <i className="fas fa-trash"></i>
-                //             </span>
-                //             <span>Delete</span>
-                //           </button>
-                //         </div>
-                //       </div>
-                //     </td>
-                //   </tr>
-                // )} */}
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      {/* <ListOfUsersFollowedTable />
-      <UserProfile /> */}
     </div>
   );
 };
